@@ -1,0 +1,4 @@
+Modelo,MAE_train,RMSE_train,R2_train,MAE_test,RMSE_test,R2_test
+Regresión lineal múltiple,265.63,374.2,0.6384,268.0,376.42,0.6293
+Regresión polinómica grado 2,335.14,456.88,0.4609,336.7,457.11,0.4534
+Regresión polinómica grado 3,313.62,433.57,0.5145,327.83,553.2,0.1994
