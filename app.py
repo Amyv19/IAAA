@@ -1,10 +1,26 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 import pandas as pd
 import numpy as np
 import joblib
+import json
 import os
+import math
 
 app = Flask(__name__)
+
+def safe_json(obj):
+    """Convierte NaN/Inf a null para JSON válido."""
+    def _clean(v):
+        if isinstance(v, float) and (math.isnan(v) or math.isinf(v)):
+            return None
+        return v
+    def _walk(o):
+        if isinstance(o, dict):  return {k: _walk(v) for k, v in o.items()}
+        if isinstance(o, list):  return [_walk(v) for v in o]
+        return _clean(o)
+    resp = make_response(json.dumps(_walk(obj)))
+    resp.headers['Content-Type'] = 'application/json'
+    return resp
 
 # ── Carga inicial ─────────────────────────────────────────────────────────────
 def load_data():
@@ -86,38 +102,37 @@ def index():
 def map_data():
     df_map = CTX.get('df_map', pd.DataFrame())
     if df_map.empty:
-        return jsonify([])
+        return safe_json([])
     cols = ['latitude','longitude','price_clean','room_type',
             'neighbourhood_cleansed','name','accommodates',
             'bedrooms','beds','review_scores_rating',
-            'host_is_superhost','picture_url']
+            'host_is_superhost']
     available = [c for c in cols if c in df_map.columns]
     rec = df_map[available].rename(columns={
         'latitude':'lat','longitude':'lng',
         'price_clean':'price','neighbourhood_cleansed':'neighbourhood'
     })
-    rec = rec.where(pd.notnull(rec), None)
-    return jsonify(rec.to_dict(orient='records'))
+    return safe_json(rec.to_dict(orient='records'))
 
 # ── API: gráficas interactivas (Plotly JSON) ──────────────────────────────────
 @app.route('/api/chart/correlation')
 def chart_correlation():
     try:
-        df = pd.read_csv('correlacion.csv')
+        df = pd.read_csv('correlacion.csv').dropna()
         df = df.sort_values('corr', ascending=False)
         colors = ['#38bdf8' if v >= 0 else '#f87171' for v in df['corr']]
-        return jsonify({
+        return safe_json({
             'data': [{
                 'type': 'bar',
                 'x': df['feature'].tolist(),
-                'y': df['corr'].tolist(),
+                'y': df['corr'].round(4).tolist(),
                 'marker': {'color': colors},
-                'name': 'Correlación',
+                'name': 'Correlacion',
             }],
             'layout': {
                 'title': '',
                 'xaxis': {'tickangle': -40, 'color': '#7d8fa8'},
-                'yaxis': {'title': 'Correlación con Price', 'color': '#7d8fa8'},
+                'yaxis': {'title': 'Correlacion con Price', 'color': '#7d8fa8'},
                 'plot_bgcolor':  'rgba(0,0,0,0)',
                 'paper_bgcolor': 'rgba(0,0,0,0)',
                 'font': {'color': '#eef4ff', 'family': 'Inter'},
@@ -125,7 +140,7 @@ def chart_correlation():
             }
         })
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return safe_json({'error': str(e)})
 
 @app.route('/api/chart/boxplot')
 def chart_boxplot():

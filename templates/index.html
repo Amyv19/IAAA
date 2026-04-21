@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Airbnb CDMX · Price Predictor</title>
-  <meta name="description" content="Dashboard de predicción de precios de Airbnb en Ciudad de México." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta name="description" content="Dashboard de predicción de precios de Airbnb en Ciudad de México."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
-  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/style.css"/>
 </head>
-
 <body>
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -58,9 +56,10 @@
     </div>
   </section>
 
+  <!-- MAIN GRID: calculator + delegation ranking -->
   <main class="page-grid">
 
-    <!-- LEFT -->
+    <!-- LEFT: calculator + model table -->
     <div class="col-left">
       <section class="card" id="calc-card">
         <div class="card-header">
@@ -84,25 +83,25 @@
           <div class="form-row three-col">
             <div class="form-group">
               <label for="accommodates">Huéspedes</label>
-              <input type="number" id="accommodates" value="2" min="1" max="20" />
+              <input type="number" id="accommodates" value="2" min="1" max="20"/>
             </div>
             <div class="form-group">
               <label for="bedrooms">Recámaras</label>
-              <input type="number" id="bedrooms" value="1" min="0" max="20" />
+              <input type="number" id="bedrooms" value="1" min="0" max="20"/>
             </div>
             <div class="form-group">
               <label for="beds">Camas</label>
-              <input type="number" id="beds" value="1" min="0" max="20" />
+              <input type="number" id="beds" value="1" min="0" max="20"/>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="minimum_nights">Noches mínimas</label>
-              <input type="number" id="minimum_nights" value="2" min="1" />
+              <input type="number" id="minimum_nights" value="2" min="1"/>
             </div>
             <div class="form-group">
               <label for="availability_365">Disponibilidad (días/año)</label>
-              <input type="number" id="availability_365" value="180" min="0" max="365" />
+              <input type="number" id="availability_365" value="180" min="0" max="365"/>
             </div>
           </div>
           <button type="submit" id="submit-btn" class="glow-btn">Estimate Price</button>
@@ -131,7 +130,7 @@
               <td>{{ r.Modelo }}</td>
               <td>{{ r.RMSE_test | round(1) }}</td>
               <td class="{{ 'pos' if r.R2_test > 0 else 'neg' }}">{{ r.R2_test | round(4) }}</td>
-              <td class="checkmark">{{ '&#10003;' if r.RMSE_test == best_rmse else '' }}</td>
+              <td class="checkmark">{{ '✓' if r.RMSE_test == best_rmse else '' }}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -139,25 +138,8 @@
       </section>
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT: delegation ranking -->
     <div class="col-right">
-      <section class="card map-card" id="map-section">
-        <div class="card-header">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
-            <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
-          </svg>
-          <h2>Listings Map &middot; CDMX</h2>
-          <div class="map-legend">
-            <span class="dot low"></span>&lt;$600
-            <span class="dot mid"></span>$600–$1,500
-            <span class="dot high"></span>&gt;$1,500
-          </div>
-        </div>
-        <div id="map"></div>
-        <p class="map-note">Sample de 3,000 listings &middot; Haz clic en un punto para ver detalles</p>
-      </section>
-
       <section class="card" id="delegaciones-card">
         <div class="card-header">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -180,15 +162,34 @@
             </div>
             <div class="deleg-bar-wrap">
               {% set max_price = delegaciones_stats[0].median_price %}
-              <div class="deleg-bar" style="width:{{ ((d.median_price / max_price) * 100) | round(1) }}%"></div>
+              <div class="deleg-bar" style="width:{{ ((d.median_price / max_price) * 100)|round(1) }}%"></div>
             </div>
           </div>
           {% endfor %}
         </div>
       </section>
     </div>
-
   </main>
+
+  <!-- MAP — full width, below the grid -->
+  <div class="map-section-full">
+    <section class="card map-full-card" id="map-section">
+      <div class="card-header">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+          <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+        <h2>Mapa de Listings por Alcaldía &middot; CDMX</h2>
+        <div class="map-legend">
+          <span class="dot low"></span>&lt;$600 &nbsp;
+          <span class="dot mid"></span>$600–$1,500 &nbsp;
+          <span class="dot high"></span>&gt;$1,500
+        </div>
+      </div>
+      <div id="map"></div>
+      <p class="map-note">3,000 listings &middot; Polígonos coloreados por precio mediano de cada alcaldía &middot; Hover para ver estadísticas</p>
+    </section>
+  </div>
 
   <!-- INTERACTIVE CHARTS -->
   <section class="plots-section">
@@ -199,27 +200,27 @@
       <h2>Interactive Visualisations</h2>
     </div>
     <div class="plots-grid">
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Correlación de Features con el Precio</p>
         <div id="chart-correlation" class="chart-div"></div>
       </div>
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Distribución de Precios (sin outliers)</p>
         <div id="chart-boxplot" class="chart-div"></div>
       </div>
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Precio mediano por Alcaldía</p>
         <div id="chart-neighbourhood" class="chart-div"></div>
       </div>
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Coeficientes del Modelo Lineal</p>
         <div id="chart-coef" class="chart-div"></div>
       </div>
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Reales vs Predichos &mdash; Modelo Lineal</p>
         <div id="chart-scatter-lin" class="chart-div"></div>
       </div>
-      <div class="plot-card chart-card">
+      <div class="chart-card">
         <p class="chart-title">Reales vs Predichos &mdash; Polinómica Grado 2</p>
         <div id="chart-scatter-p2" class="chart-div"></div>
       </div>
