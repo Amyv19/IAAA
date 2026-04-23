@@ -9,15 +9,6 @@
 - **Visualizaciones**: Plotly.js (interactivo) · Leaflet.js (mapa)
 - **Datos**: [Inside Airbnb — Mexico City](https://insideairbnb.com/mexico-city/)
 
-## Features
-
-- 📊 6 gráficas interactivas (correlación, boxplot, scatter, coeficientes)
-- 🗺️ Mapa interactivo con 3,000 listings coloreados por precio
-- 🏙️ Ranking de las 16 alcaldías de CDMX por precio mediano
-- 🧮 Calculadora de precio en tiempo real (ML)
-- 📈 Comparativa de 3 modelos: Lineal, Polinómica G2 y G3
-
-## Setup local
 
 ```bash
 pip install -r requirements.txt
