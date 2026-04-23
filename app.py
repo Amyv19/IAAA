@@ -5,6 +5,12 @@ import joblib
 import json
 import os
 import math
+# Importar módulos de sklearn necesarios para cargar el modelo
+import sklearn.linear_model
+import sklearn.compose
+import sklearn.pipeline
+import sklearn.impute
+import sklearn.preprocessing
 
 app = Flask(__name__)
 
