@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Airbnb CDMX · Price Predictor</title>
+  <meta name="description" content="Dashboard de predicción de precios de Airbnb en Ciudad de México."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  <link rel="stylesheet" href="static/css/style.css"/>
+</head>
+<body>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="brand">
+      <svg class="brand-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      <span class="brand-name">Airbnb <strong>CDMX</strong></span>
+    </div>
+    <span class="nav-tag">Machine Learning Dashboard</span>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Regresión Lineal &middot; Scikit-Learn</div>
+    <h1>Price Predictor</h1>
+    <p class="hero-sub">Modelo entrenado con <strong>27,051</strong> listings reales de Airbnb en Ciudad de México</p>
+  </header>
+
+  <!-- KPIs -->
+  <section class="kpi-row">
+    <div class="kpi-card">
+      <span class="kpi-label">Listings analizados</span>
+      <span class="kpi-value">27,051</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Precio mediano / noche</span>
+      <span class="kpi-value">$1,039 <small>MXN</small></span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Precio promedio / noche</span>
+      <span class="kpi-value">$1,793 <small>MXN</small></span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Alcaldías</span>
+      <span class="kpi-value">16</span>
+    </div>
+  </section>
+
+  <!-- MAIN GRID: calculator + delegation ranking -->
+  <main class="page-grid">
+
+    <!-- LEFT: calculator + model table -->
+    <div class="col-left">
+      <section class="card" id="calc-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="2" width="16" height="20" rx="2"/>
+            <line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/>
+          </svg>
+          <h2>Price Calculator</h2>
+        </div>
+        <form id="predict-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="room_type">Tipo de espacio</label>
+              <select id="room_type"><option value="Entire home/apt">Entire home/apt</option><option value="Hotel room">Hotel room</option><option value="Private room">Private room</option><option value="Shared room">Shared room</option></select>
+            </div>
+            <div class="form-group">
+              <label for="neighbourhood">Alcaldía</label>
+              <select id="neighbourhood"><option value="Azcapotzalco">Azcapotzalco</option><option value="Benito Juárez">Benito Juárez</option><option value="Coyoacán">Coyoacán</option><option value="Cuajimalpa de Morelos">Cuajimalpa de Morelos</option><option value="Cuauhtémoc">Cuauhtémoc</option><option value="Gustavo A. Madero">Gustavo A. Madero</option><option value="Iztacalco">Iztacalco</option><option value="Iztapalapa">Iztapalapa</option><option value="La Magdalena Contreras">La Magdalena Contreras</option><option value="Miguel Hidalgo">Miguel Hidalgo</option><option value="Milpa Alta">Milpa Alta</option><option value="Tlalpan">Tlalpan</option><option value="Tláhuac">Tláhuac</option><option value="Venustiano Carranza">Venustiano Carranza</option><option value="Xochimilco">Xochimilco</option><option value="Álvaro Obregón">Álvaro Obregón</option></select>
+            </div>
+          </div>
+          <div class="form-row three-col">
+            <div class="form-group">
+              <label for="accommodates">Huéspedes</label>
+              <input type="number" id="accommodates" value="2" min="1" max="20"/>
+            </div>
+            <div class="form-group">
+              <label for="bedrooms">Recámaras</label>
+              <input type="number" id="bedrooms" value="1" min="0" max="20"/>
+            </div>
+            <div class="form-group">
+              <label for="beds">Camas</label>
+              <input type="number" id="beds" value="1" min="0" max="20"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="minimum_nights">Noches mínimas</label>
+              <input type="number" id="minimum_nights" value="2" min="1"/>
+            </div>
+            <div class="form-group">
+              <label for="availability_365">Disponibilidad (días/año)</label>
+              <input type="number" id="availability_365" value="180" min="0" max="365"/>
+            </div>
+          </div>
+          <button type="submit" id="submit-btn" class="glow-btn">Estimate Price</button>
+        </form>
+        <div id="result-box" class="hidden">
+          <div class="result-label">Precio estimado por noche</div>
+          <div id="price-result">$0.00</div>
+          <div class="result-sub">MXN &middot; Regresión Lineal Múltiple</div>
+        </div>
+      </section>
+
+      <section class="card" id="metrics-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
+          </svg>
+          <h2>Model Comparison</h2>
+        </div>
+        <table>
+          <thead><tr><th>Model</th><th>RMSE</th><th>R²</th><th>Best</th></tr></thead>
+          <tbody>
+            
+            
+            <tr class="best-row">
+              <td>Regresión lineal múltiple</td>
+              <td>376.4</td>
+              <td class="pos">0.6293</td>
+              <td class="checkmark">✓</td>
+            </tr>
+            
+            <tr class="">
+              <td>Regresión polinómica grado 2</td>
+              <td>457.1</td>
+              <td class="pos">0.4534</td>
+              <td class="checkmark"></td>
+            </tr>
+            
+            <tr class="">
+              <td>Regresión polinómica grado 3</td>
+              <td>553.2</td>
+              <td class="pos">0.1994</td>
+              <td class="checkmark"></td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <!-- RIGHT: delegation ranking -->
+    <div class="col-right">
+      <section class="card" id="delegaciones-card">
+        <div class="card-header">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <h2>Ranking por Alcaldía</h2>
+        </div>
+        <div class="delegaciones-list">
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">1</span>
+              <span class="deleg-name">Miguel Hidalgo</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">3,979 listings</span>
+              <span class="deleg-price">$1,301</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:100.0%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">2</span>
+              <span class="deleg-name">Cuajimalpa de Morelos</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">349 listings</span>
+              <span class="deleg-price">$1,286</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:98.8%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">3</span>
+              <span class="deleg-name">Cuauhtémoc</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">11,253 listings</span>
+              <span class="deleg-price">$1,185</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:91.1%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">4</span>
+              <span class="deleg-name">Milpa Alta</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">22 listings</span>
+              <span class="deleg-price">$946</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:72.7%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">5</span>
+              <span class="deleg-name">Álvaro Obregón</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">812 listings</span>
+              <span class="deleg-price">$900</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:69.2%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">6</span>
+              <span class="deleg-name">Benito Juárez</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">2,528 listings</span>
+              <span class="deleg-price">$811</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:62.3%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">7</span>
+              <span class="deleg-name">Coyoacán</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">1,415 listings</span>
+              <span class="deleg-price">$794</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:61.0%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">8</span>
+              <span class="deleg-name">La Magdalena Contreras</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">108 listings</span>
+              <span class="deleg-price">$790</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:60.7%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">9</span>
+              <span class="deleg-name">Iztacalco</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">441 listings</span>
+              <span class="deleg-price">$745</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:57.3%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">10</span>
+              <span class="deleg-name">Venustiano Carranza</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">816 listings</span>
+              <span class="deleg-price">$682</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:52.4%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">11</span>
+              <span class="deleg-name">Tlalpan</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">626 listings</span>
+              <span class="deleg-price">$638</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:49.0%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">12</span>
+              <span class="deleg-name">Xochimilco</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">120 listings</span>
+              <span class="deleg-price">$617</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:47.4%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">13</span>
+              <span class="deleg-name">Gustavo A. Madero</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">459 listings</span>
+              <span class="deleg-price">$552</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:42.4%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">14</span>
+              <span class="deleg-name">Iztapalapa</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">261 listings</span>
+              <span class="deleg-price">$543</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:41.7%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">15</span>
+              <span class="deleg-name">Azcapotzalco</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">344 listings</span>
+              <span class="deleg-price">$512</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:39.4%"></div>
+            </div>
+          </div>
+          
+          <div class="deleg-row">
+            <div class="deleg-info">
+              <span class="deleg-rank">16</span>
+              <span class="deleg-name">Tláhuac</span>
+            </div>
+            <div class="deleg-stats">
+              <span class="deleg-count">34 listings</span>
+              <span class="deleg-price">$344</span>
+            </div>
+            <div class="deleg-bar-wrap">
+              
+              <div class="deleg-bar" style="width:26.4%"></div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- MAP — full width, below the grid -->
+  <div class="map-section-full">
+    <section class="card map-full-card" id="map-section">
+      <div class="card-header">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+          <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+        <h2>Mapa de Listings por Alcaldía &middot; CDMX</h2>
+        <div class="map-legend">
+          <span class="dot low"></span>&lt;$600 &nbsp;
+          <span class="dot mid"></span>$600–$1,500 &nbsp;
+          <span class="dot high"></span>&gt;$1,500
+        </div>
+      </div>
+      <div id="map"></div>
+      <p class="map-note">3,000 listings &middot; Polígonos coloreados por precio mediano de cada alcaldía &middot; Hover para ver estadísticas</p>
+    </section>
+  </div>
+
+  <!-- INTERACTIVE CHARTS -->
+  <section class="plots-section">
+    <div class="section-title">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <h2>Interactive Visualisations</h2>
+    </div>
+    <div class="plots-grid">
+      <div class="chart-card">
+        <p class="chart-title">Correlación de Features con el Precio</p>
+        <div id="chart-correlation" class="chart-div"></div>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Distribución de Precios (sin outliers)</p>
+        <div id="chart-boxplot" class="chart-div"></div>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Precio mediano por Alcaldía</p>
+        <div id="chart-neighbourhood" class="chart-div"></div>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Coeficientes del Modelo Lineal</p>
+        <div id="chart-coef" class="chart-div"></div>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Reales vs Predichos &mdash; Modelo Lineal</p>
+        <div id="chart-scatter-lin" class="chart-div"></div>
+      </div>
+      <div class="chart-card">
+        <p class="chart-title">Reales vs Predichos &mdash; Polinómica Grado 2</p>
+        <div id="chart-scatter-p2" class="chart-div"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>Academic project &middot; Data: <a href="https://insideairbnb.com" target="_blank">Inside Airbnb CDMX</a> &middot; Model: Scikit-Learn &middot; Charts: Plotly &middot; Map: Leaflet</p>
+  </footer>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
