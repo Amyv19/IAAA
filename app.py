@@ -5,6 +5,7 @@ import joblib
 import json
 import os
 import math
+from pathlib import Path
 # Importar módulos de sklearn necesarios para cargar el modelo
 import sklearn.linear_model
 import sklearn.compose
@@ -12,7 +13,59 @@ import sklearn.pipeline
 import sklearn.impute
 import sklearn.preprocessing
 
-app = Flask(__name__)
+ROOT = Path(__file__).resolve().parent
+app = Flask(__name__, template_folder=str(ROOT / 'templates'), static_folder=str(ROOT / 'static'))
+
+
+def project_path(*parts):
+    return ROOT.joinpath(*parts)
+DEFAULT_DATA_CANDIDATES = [
+    os.getenv('COIL_DATA_PATH'),
+    r'C:\Users\AmyVa\Downloads\listings.csv.gz',
+    str(ROOT / 'listings.csv.gz'),
+    str(ROOT / 'listings.csv'),
+]
+
+
+def resolve_data_path():
+    for candidate in DEFAULT_DATA_CANDIDATES:
+        if candidate and Path(candidate).exists():
+            return Path(candidate)
+    raise FileNotFoundError(
+        'No se encontro dataset. Define COIL_DATA_PATH o coloca listings.csv(.gz) junto a app.py.'
+    )
+
+
+def read_dataset(path):
+    compression = 'gzip' if path.suffix == '.gz' else None
+    return pd.read_csv(path, low_memory=False, compression=compression)
+
+
+def clean_price_column(series):
+    return pd.to_numeric(
+        series.astype(str).str.replace(r'[\$,]', '', regex=True).str.strip(),
+        errors='coerce'
+    )
+
+
+def resolve_usable_data_path():
+    attempted = []
+    for candidate in DEFAULT_DATA_CANDIDATES:
+        if not candidate:
+            continue
+        path = Path(candidate)
+        if not path.exists():
+            continue
+        df_candidate = read_dataset(path)
+        if 'price' not in df_candidate.columns:
+            attempted.append(f'{path} (sin columna price)')
+            continue
+        valid = clean_price_column(df_candidate['price']).dropna()
+        valid = valid[valid > 0]
+        if len(valid) > 0:
+            return path, df_candidate
+        attempted.append(f'{path} (sin precios validos)')
+    raise ValueError('Ningun dataset disponible contiene precios validos: ' + '; '.join(attempted))
 
 def safe_json(obj):
     """Convierte NaN/Inf a null para JSON válido."""
@@ -31,25 +84,32 @@ def safe_json(obj):
 # ── Carga inicial ─────────────────────────────────────────────────────────────
 def load_data():
     ctx = {}
+    data_path = None
     try:
-        ctx['modelo']      = joblib.load('modelo_lineal.pkl')
-        ctx['resultados']  = pd.read_csv('resultados_modelos.csv').to_dict(orient='records')
-        ctx['coeficientes']= pd.read_csv('coeficientes_modelo_lineal.csv').to_dict(orient='records')
-        ctx['X_template']  = pd.read_csv('template_prediccion.csv')
+        ctx['modelo']      = joblib.load(project_path('modelo_principal.pkl'))
+        ctx['resultados']  = pd.read_csv(project_path('resultados_modelos.csv')).to_dict(orient='records')
+        ctx['coeficientes']= pd.read_csv(project_path('coeficientes_modelo_lineal.csv')).to_dict(orient='records')
+        ctx['X_template']  = pd.read_csv(project_path('template_prediccion.csv'))
         ctx['model_ready'] = True
     except Exception as e:
-        print(f"[WARN] Modelo no listo: {e}")
-        ctx['modelo'] = ctx['X_template'] = None
-        ctx['resultados'] = ctx['coeficientes'] = []
-        ctx['model_ready'] = False
+        try:
+            ctx['modelo'] = joblib.load(project_path('modelo_lineal.pkl'))
+            ctx['resultados'] = pd.read_csv(project_path('resultados_modelos.csv')).to_dict(orient='records')
+            ctx['coeficientes'] = pd.read_csv(project_path('coeficientes_modelo_lineal.csv')).to_dict(orient='records')
+            ctx['X_template'] = pd.read_csv(project_path('template_prediccion.csv'))
+            ctx['model_ready'] = True
+            print(f"[WARN] Usando fallback a modelo_lineal.pkl: {e}")
+        except Exception as inner_e:
+            print(f"[WARN] Modelo no listo: {inner_e}")
+            ctx['modelo'] = ctx['X_template'] = None
+            ctx['resultados'] = ctx['coeficientes'] = []
+            ctx['model_ready'] = False
 
     try:
-        df = pd.read_csv('listings.csv', low_memory=False)
-        df['price_clean'] = pd.to_numeric(
-            df['price'].astype(str).str.replace(r'[\$,]', '', regex=True),
-            errors='coerce'
-        )
+        data_path, df = resolve_usable_data_path()
+        df['price_clean'] = clean_price_column(df['price'])
         ctx['df_full'] = df
+        ctx['dataset_path'] = str(data_path)
 
         df_map = df.dropna(subset=['latitude','longitude','price_clean']).copy()
         df_map = df_map[df_map['price_clean'] > 0]
@@ -76,7 +136,7 @@ def load_data():
         ctx['delegaciones_stats'] = dleg.sort_values('median_price', ascending=False).to_dict(orient='records')
 
     except Exception as e:
-        print(f"[ERROR] listings.csv: {e}")
+        print(f"[ERROR] dataset: {e}")
         ctx.setdefault('df_full', pd.DataFrame())
         ctx.setdefault('df_map', pd.DataFrame())
         ctx.setdefault('neighbourhoods', [])
@@ -84,6 +144,7 @@ def load_data():
         ctx.setdefault('property_types', [])
         ctx.setdefault('kpis', {})
         ctx.setdefault('delegaciones_stats', [])
+        ctx.setdefault('dataset_path', str(data_path) if data_path else None)
 
     return ctx
 
@@ -124,7 +185,7 @@ def map_data():
 @app.route('/api/chart/correlation')
 def chart_correlation():
     try:
-        df = pd.read_csv('correlacion.csv').dropna()
+        df = pd.read_csv(project_path('correlacion.csv')).dropna()
         df = df.sort_values('corr', ascending=False)
         colors = ['#38bdf8' if v >= 0 else '#f87171' for v in df['corr']]
         return safe_json({
@@ -151,7 +212,7 @@ def chart_correlation():
 @app.route('/api/chart/boxplot')
 def chart_boxplot():
     try:
-        df = pd.read_csv('price_sample.csv').dropna()
+        df = pd.read_csv(project_path('price_sample.csv')).dropna()
         return jsonify({
             'data': [{
                 'type': 'box',
@@ -178,7 +239,7 @@ def chart_boxplot():
 @app.route('/api/chart/scatter-lineal')
 def chart_scatter_lineal():
     try:
-        df = pd.read_csv('scatter_lineal.csv').dropna()
+        df = pd.read_csv(project_path('scatter_lineal.csv')).dropna()
         max_val = float(df['real'].quantile(0.99))
         return jsonify({
             'data': [
@@ -212,7 +273,7 @@ def chart_scatter_lineal():
 @app.route('/api/chart/scatter-poly2')
 def chart_scatter_poly2():
     try:
-        df = pd.read_csv('scatter_poly2.csv').dropna()
+        df = pd.read_csv(project_path('scatter_poly2.csv')).dropna()
         max_val = float(df['real'].quantile(0.99))
         return jsonify({
             'data': [
@@ -246,7 +307,7 @@ def chart_scatter_poly2():
 @app.route('/api/chart/coefficients')
 def chart_coefficients():
     try:
-        df = pd.read_csv('coeficientes_modelo_lineal.csv')
+        df = pd.read_csv(project_path('coeficientes_modelo_lineal.csv'))
         top = pd.concat([df.head(10), df.tail(10)]).drop_duplicates()
         colors = ['#38bdf8' if v >= 0 else '#f87171' for v in top['Coeficiente']]
         return jsonify({
@@ -273,7 +334,7 @@ def chart_coefficients():
 @app.route('/api/chart/price-by-neighbourhood')
 def chart_price_neighbourhood():
     try:
-        df = pd.read_csv('price_by_neighbourhood.csv').dropna().sort_values('median_price', ascending=True)
+        df = pd.read_csv(project_path('price_by_neighbourhood.csv')).dropna().sort_values('median_price', ascending=True)
         return jsonify({
             'data': [{
                 'type': 'bar', 'orientation': 'h',
@@ -329,4 +390,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='127.0.0.1', port=5000, debug=False, use_reloader=False)

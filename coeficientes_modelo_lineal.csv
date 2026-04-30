@@ -1,144 +1,143 @@
 Variable,Coeficiente
-maximum_maximum_nights,1710111.1587618303
-maximum_nights_avg_ntm,44143.37331304265
-property_type_Castle,1279.9342514890304
-property_type_Private room in tent,1097.2273530890234
-property_type_Entire home/apt,942.5606326960799
-property_type_Room in serviced apartment,677.5311821271316
-estimated_revenue_l365d,498.01707931991183
-property_type_Private room in dome,489.75001162844273
-property_type_Entire villa,480.87807109134155
-property_type_Private room in yurt,373.9327911177079
-property_type_Private room in tower,366.95643044379085
-property_type_Private room in lighthouse,362.8488483674722
-property_type_Room in boutique hotel,348.17793895524665
-property_type_Room in hotel,330.22536710841814
-property_type_Room in bed and breakfast,313.16016576662514
-property_type_Shared room in condo,303.1670602199738
-room_type_Entire home/apt,294.6376700496767
-neighbourhood_cleansed_Iztacalco,240.86593454662943
-availability_90,234.57229433841766
-neighbourhood_cleansed_Venustiano Carran...,221.41656061232788
-neighbourhood_cleansed_Cuauhtémoc,212.7557375399192
-neighbourhood_cleansed_Miguel Hidalgo,202.33424211564125
-neighbourhood_cleansed_Gustavo A. Madero,200.69432718853932
-property_type_Entire home,194.71609059459297
-property_type_Room in casa particular,138.06753707692633
-property_type_Private room in hut,138.0662983775892
-property_type_Room in aparthotel,133.47745791235866
-property_type_Private room in villa,132.3780559829047
-accommodates,122.60905806039791
-room_type_Private room,109.58560744315037
-host_response_time_within an hour,92.72139554504975
-property_type_Private room in loft,90.30165530122758
-property_type_Entire cabin,87.93261933663598
-property_type_Entire townhouse,79.69890329977352
-property_type_Private room in hostel,72.90360351698837
-neighbourhood_cleansed_Milpa Alta,69.95473078406667
-host_response_time_within a few hours,56.16777738271048
-property_type_Entire place,48.337499886779824
-property_type_Shared room in rental unit,46.99143324136821
-host_total_listings_count,45.83521844485038
-property_type_Shared room in loft,43.114210441797695
-availability_30,42.88662902924949
-bedrooms,40.326589558036304
-property_type_Entire serviced apartment,37.5152679606108
-host_acceptance_rate,37.1224744882289
-review_scores_cleanliness,35.86468453175621
-property_type_Entire vacation home,35.84704167877521
-property_type_Private room in shipping c...,35.75938617406064
-property_type_Shared room in casa partic...,34.29908255940404
-review_scores_rating,33.4167750919914
-host_response_time_within a day,32.42754720407538
-review_scores_location,27.681577861949336
-number_of_reviews_ltm,27.626407519471556
-minimum_nights,26.203194365851132
-host_is_superhost,25.549382693437465
-neighbourhood_cleansed_Benito Juárez,20.013489325843693
-property_type_Entire rental unit,17.009162898451905
-bathrooms,14.594791950248204
-instant_bookable,14.254582589870552
-property_type_Shared room in hostel,13.362362537169247
-property_type_Entire condo,12.980961505294545
-property_type_Private room in guest suit...,10.33106466413301
-review_scores_accuracy,4.776092451424148
-property_type_Shared room in hotel,3.5517145397971035
-neighbourhood_cleansed_Azcapotzalco,3.1087818772066385
-number_of_reviews,1.6017475654581403
-has_availability,-2.0090458761501395e-05
-availability_365,-0.2736964712427721
-number_of_reviews_ly,-2.6020565692287505
-minimum_nights_avg_ntm,-4.718693936353333
-reviews_per_month,-6.8770087428274564
-property_type_Entire loft,-7.674425754812546
-property_type_Private room in earthen ho...,-8.087724974644857
-maximum_minimum_nights,-8.64483266428072
-availability_60,-8.773656823791939
-number_of_reviews_l30d,-11.358987319555268
-maximum_nights,-12.52768905769156
-review_scores_checkin,-13.894304998364532
-review_scores_communication,-14.225157259730622
-calculated_host_listings_count,-15.50803632219322
-minimum_minimum_nights,-16.69687108171364
-property_type_Shipping container,-17.84229416934977
-property_type_Entire cottage,-19.713185460990644
-host_listings_count,-21.859484724962783
-review_scores_value,-23.383062535809586
-neighbourhood_cleansed_Iztapalapa,-26.213824201899115
-neighbourhood_cleansed_Coyoacán,-30.07777978201193
-property_type_Entire chalet,-33.10800396535524
-property_type_Private room in guesthouse,-35.99891575712536
-property_type_Tower,-41.22197930176935
-beds,-41.85448899160036
-host_response_rate,-48.13479680204503
-property_type_Private room in townhouse,-48.39406746698751
-property_type_Private room in serviced a...,-49.45285215291369
-property_type_Private room in bed and br...,-59.2745165227243
-property_type_Earthen home,-61.080482076615
-property_type_Shared room in guesthouse,-62.19035476881254
-property_type_Entire bungalow,-64.23463279055477
-property_type_Private room in cabin,-64.91200634496818
-latitude,-66.07379798662464
-property_type_Hut,-67.08118740100372
-property_type_Private room,-71.19077718817425
-property_type_Casa particular,-71.88977645731393
-property_type_Private room in home,-73.95039074192755
-neighbourhood_cleansed_Cuajimalpa de Mor...,-77.5069313536369
-room_type_Hotel room,-87.52950497725124
-property_type_Shared room in home,-93.2377199325856
-longitude,-97.38304954458283
-property_type_Private room in nature lod...,-97.52776629137588
-property_type_Private room in barn,-99.41999011236476
-property_type_Private room in condo,-101.59962179703871
-property_type_Private room in minsu,-112.72262389752882
-property_type_Private room in casa parti...,-114.55150302656693
-property_type_Private room in rental uni...,-115.68481465236982
-neighbourhood_cleansed_Álvaro Obregón,-117.56121462106239
-property_type_Entire guest suite,-139.44627244088406
-neighbourhood_cleansed_La Magdalena Cont...,-163.97060403315845
-property_type_Private room in vacation h...,-175.8815826237187
-host_response_time_a few days or more,-181.31659115478396
-property_type_Private room in tiny home,-199.86369301145487
-neighbourhood_cleansed_Tláhuac,-203.02793930543703
-property_type_Dome,-213.48514808924028
-property_type_Private room in castle,-216.06788082957064
-availability_eoy,-226.64945245997515
-property_type_Entire guesthouse,-229.93548186635599
-property_type_Tiny home,-237.62804943041374
-neighbourhood_cleansed_Tlalpan,-249.32650613507212
-property_type_Entire in-law,-259.24609653965933
-property_type_Tent,-287.11571296969487
-property_type_Shared room in townhouse,-301.8875184597273
-neighbourhood_cleansed_Xochimilco,-303.4589907781119
-property_type_Shared room in bed and bre...,-303.8640951597554
-room_type_Shared room,-316.6938046076102
-property_type_Barn,-323.11571324407976
-property_type_Private room in resort,-345.88780865450144
-property_type_Private room in farm stay,-398.690907594671
-property_type_Holiday park,-424.1181743453235
-estimated_occupancy_l365d,-466.18004314375213
-property_type_Entire hostel,-517.9738170539986
-property_type_Camper/RV,-732.2464269007596
-property_type_Campsite,-931.6764876591128
-property_type_Private room in cottage,-942.8191067146995
-minimum_maximum_nights,-1754251.3168515183
+maximum_maximum_nights,1621077.7772697003
+maximum_nights_avg_ntm,93552.82851062519
+property_type_Castle,1288.0040390104623
+property_type_Private room in tent,1093.6326475469177
+property_type_Entire home/apt,951.0473873707147
+property_type_Room in serviced apartment,678.1487154019924
+estimated_revenue_l365d,500.2486672295661
+property_type_Private room in dome,485.32108204126416
+property_type_Entire villa,478.29147536105665
+property_type_Private room in yurt,370.0015184760432
+property_type_Private room in tower,364.5739704916682
+property_type_Private room in lighthouse,363.0383451354087
+property_type_Room in boutique hotel,344.92970310868986
+property_type_Room in hotel,328.89340904162236
+property_type_Room in bed and breakfast,311.04615757323336
+room_type_Entire home/apt,293.2100418601185
+property_type_Shared room in condo,287.2587518482178
+neighbourhood_cleansed_Iztacalco,240.1507668397644
+availability_90,237.39560293965104
+neighbourhood_cleansed_Venustiano Carran...,219.19072060490362
+neighbourhood_cleansed_Cuauhtémoc,212.97561251898878
+neighbourhood_cleansed_Miguel Hidalgo,202.07741440545942
+neighbourhood_cleansed_Gustavo A. Madero,197.89705116865662
+property_type_Entire home,197.27380314796028
+property_type_Private room in villa,142.6588445801608
+property_type_Room in casa particular,139.53944193949224
+property_type_Room in aparthotel,134.5894777420326
+property_type_Private room in hut,134.09072301802644
+accommodates,123.781642831589
+room_type_Private room,107.83234600594733
+property_type_Private room in loft,94.55072736745933
+host_response_time_within an hour,92.89756254618987
+property_type_Private room in hostel,86.29473891334783
+property_type_Entire cabin,82.5702417424618
+property_type_Entire townhouse,74.9780498591499
+neighbourhood_cleansed_Milpa Alta,73.2866796799924
+property_type_Private room in shipping c...,67.32450587146195
+host_response_time_within a few hours,55.809234176413156
+property_type_Entire place,46.20552539624305
+bedrooms,45.78422730819691
+property_type_Shared room in casa partic...,45.500594142711634
+host_total_listings_count,45.32568438071341
+availability_30,42.37352339863517
+host_acceptance_rate,36.84268777193341
+property_type_Shared room in rental unit,35.90490284388943
+review_scores_cleanliness,35.06880790157129
+property_type_Entire serviced apartment,34.472020672285
+review_scores_rating,33.18815923066719
+host_response_time_within a day,32.34968118718825
+property_type_Entire vacation home,29.674321603414683
+review_scores_location,27.866005356889218
+number_of_reviews_ltm,27.257327408981354
+host_is_superhost,25.601213050301272
+minimum_nights,24.34095036482808
+neighbourhood_cleansed_Benito Juárez,21.122342454618774
+property_type_Entire rental unit,14.21730496827513
+instant_bookable,14.136819478764664
+property_type_Shared room in hostel,13.050707973598037
+property_type_Entire condo,11.025431762303924
+property_type_Private room in guest suit...,10.07212567710667
+property_type_Shared room in loft,9.968610633111894
+property_type_Shared room in hotel,5.643393665355688
+review_scores_accuracy,4.421071446190066
+number_of_reviews,1.5767830782451426
+has_availability,8.08400867882142e-05
+availability_365,-0.23592398872438025
+minimum_nights_avg_ntm,-0.7295575196211477
+neighbourhood_cleansed_Azcapotzalco,-0.840205559664355
+number_of_reviews_ly,-2.3161345990425417
+property_type_Private room in earthen ho...,-3.313532215189298
+reviews_per_month,-6.8467738257022575
+availability_60,-7.6787073464649325
+property_type_Entire cottage,-7.845221210729505
+maximum_minimum_nights,-9.521934546758102
+property_type_Entire loft,-10.527098520484287
+number_of_reviews_l30d,-11.31219871017413
+maximum_nights,-12.790089919053969
+calculated_host_listings_count,-13.839381992351264
+review_scores_communication,-13.840848538093269
+review_scores_checkin,-14.06829010634101
+minimum_minimum_nights,-17.726568010452198
+property_type_Shipping container,-18.708982413656486
+host_listings_count,-21.865952785538347
+review_scores_value,-22.781187120330287
+neighbourhood_cleansed_Iztapalapa,-27.254909134670015
+property_type_Private room in guesthouse,-29.288643681633403
+property_type_Shared room in guesthouse,-29.296309656929225
+neighbourhood_cleansed_Coyoacán,-30.392063816951122
+property_type_Entire chalet,-33.37845190484404
+beds,-40.631919297205336
+property_type_Private room in bed and br...,-42.880513043484825
+property_type_Tower,-43.002819142801854
+property_type_Private room in serviced a...,-46.2342189111223
+host_response_rate,-47.779148930459364
+property_type_Private room in townhouse,-48.75843108252229
+property_type_Earthen home,-64.88924099842592
+latitude,-65.32714145709767
+property_type_Entire bungalow,-66.30992628826289
+property_type_Private room in cabin,-66.96255844122243
+property_type_Private room,-69.01741019075416
+property_type_Private room in home,-70.22831325689913
+property_type_Hut,-74.09271463023106
+neighbourhood_cleansed_Cuajimalpa de Mor...,-75.54755408447818
+property_type_Casa particular,-77.64303233103783
+room_type_Hotel room,-91.6238613980313
+property_type_Shared room in home,-93.0609098275745
+longitude,-97.92072998305773
+property_type_Private room in nature lod...,-100.61630422176859
+property_type_Private room in condo,-102.35155855625635
+property_type_Private room in barn,-102.81613433238817
+property_type_Private room in casa parti...,-110.19142559419561
+property_type_Private room in rental uni...,-116.02384334519593
+property_type_Private room in minsu,-116.63900017122143
+neighbourhood_cleansed_Álvaro Obregón,-117.71247193847194
+property_type_Entire guest suite,-141.40800293034408
+neighbourhood_cleansed_La Magdalena Cont...,-163.19748036697274
+property_type_Private room in vacation h...,-170.95546123723034
+host_response_time_a few days or more,-181.05652109516086
+property_type_Private room in tiny home,-194.96371537838786
+neighbourhood_cleansed_Tláhuac,-201.41084971340024
+property_type_Private room in castle,-215.24779128472437
+property_type_Dome,-221.31094274686802
+property_type_Entire guesthouse,-226.13045142532792
+availability_eoy,-230.25262248121706
+property_type_Tiny home,-239.30434285922092
+neighbourhood_cleansed_Tlalpan,-248.12100813748043
+property_type_Entire in-law,-270.06526974200517
+property_type_Shared room in bed and bre...,-279.7614384607923
+neighbourhood_cleansed_Xochimilco,-302.224032821872
+property_type_Shared room in townhouse,-304.62681663417607
+room_type_Shared room,-309.4185033542508
+property_type_Tent,-323.542671040017
+property_type_Barn,-341.688277673345
+property_type_Private room in resort,-352.6337027032255
+property_type_Private room in farm stay,-399.551257577393
+property_type_Holiday park,-400.09998917351186
+estimated_occupancy_l365d,-468.4861998893218
+property_type_Entire hostel,-520.6200372679859
+property_type_Camper/RV,-735.3748625453563
+property_type_Campsite,-926.7488292467738
+property_type_Private room in cottage,-945.6822853194544
+minimum_maximum_nights,-1714627.4956102874

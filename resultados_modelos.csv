@@ -1,4 +1,8 @@
 Modelo,MAE_train,RMSE_train,R2_train,MAE_test,RMSE_test,R2_test
-Regresión lineal múltiple,265.63,374.2,0.6384,268.0,376.42,0.6293
-Regresión polinómica grado 2,335.14,456.88,0.4609,336.7,457.11,0.4534
-Regresión polinómica grado 3,313.62,433.57,0.5145,327.83,553.2,0.1994
+Gradient Boosting,187.68,285.76,0.7891,193.2,292.79,0.7758
+Random Forest,156.05,269.75,0.8121,178.14,302.38,0.7608
+Elastic Net,266.6,375.59,0.6357,268.58,376.91,0.6284
+Ridge,266.38,374.93,0.637,268.75,376.95,0.6283
+Regresion lineal multiple,265.92,374.38,0.638,268.62,377.06,0.6281
+Regresion polinomica grado 2,336.84,463.11,0.4461,337.95,465.52,0.4331
+Regresion polinomica grado 3,335.11,920.22,-1.1868,337.95,564.69,0.1658
