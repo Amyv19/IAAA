@@ -1,4 +1,6 @@
-/* DESIGN SYSTEM — Airbnb CDMX ML Dashboard */
+/* ══════════════════════════════════════════════════════════
+   DESIGN SYSTEM — Airbnb CDMX ML Dashboard
+   ══════════════════════════════════════════════════════════ */
 :root {
   --bg:          #07101f;
   --surface:     rgba(255,255,255,0.04);
@@ -27,11 +29,13 @@ body{
   min-height:100vh;overflow-x:hidden;line-height:1.6;font-size:15px;
 }
 
+/* ── Orbs ────────────────────────── */
 .orb{position:fixed;border-radius:50%;filter:blur(110px);pointer-events:none;z-index:0;opacity:0.28;}
 .orb-1{width:700px;height:700px;background:radial-gradient(circle,#1e3a8a,transparent 70%);top:-250px;left:-200px;}
 .orb-2{width:550px;height:550px;background:radial-gradient(circle,#5b21b6,transparent 70%);top:45vh;right:-220px;}
 .orb-3{width:450px;height:450px;background:radial-gradient(circle,#0c4a6e,transparent 70%);bottom:0;left:35vw;}
 
+/* ── Navbar ──────────────────────── */
 .navbar{
   position:sticky;top:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
@@ -44,6 +48,7 @@ body{
 .brand strong{color:var(--primary);}
 .nav-tag{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:4px 14px;border-radius:99px;}
 
+/* ── Hero ────────────────────────── */
 .hero{position:relative;z-index:1;text-align:center;padding:4rem 1.5rem 1.5rem;}
 .hero-badge{
   display:inline-block;margin-bottom:1.2rem;
@@ -60,6 +65,7 @@ body{
 .hero-sub{color:var(--muted);font-size:1rem;max-width:520px;margin:0 auto;}
 .hero-sub strong{color:var(--text);}
 
+/* ── KPIs ────────────────────────── */
 .kpi-row{
   position:relative;z-index:1;
   display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
@@ -76,6 +82,7 @@ body{
 .kpi-value{font-size:1.75rem;font-weight:700;color:var(--primary);line-height:1.2;}
 .kpi-value small{font-size:.8rem;font-weight:400;color:var(--muted);}
 
+/* ── Page Grid ───────────────────── */
 .page-grid{
   position:relative;z-index:1;
   display:grid;grid-template-columns:420px 1fr;gap:1.5rem;
@@ -84,6 +91,7 @@ body{
 @media(max-width:1060px){.page-grid{grid-template-columns:1fr;}}
 .col-left,.col-right{display:flex;flex-direction:column;gap:1.5rem;}
 
+/* ── Card ────────────────────────── */
 .card{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   padding:1.8rem;backdrop-filter:blur(16px);box-shadow:var(--shadow);
@@ -93,8 +101,8 @@ body{
 .card-header{display:flex;align-items:center;gap:10px;margin-bottom:1.4rem;flex-wrap:wrap;}
 .icon{width:17px;height:17px;stroke:var(--primary);flex-shrink:0;opacity:.8;}
 .card-header h2{font-size:1rem;font-weight:700;flex:1;letter-spacing:-.01em;}
-.section-copy{color:var(--muted);font-size:.88rem;margin:-.4rem 0 1rem;}
 
+/* ── Form ────────────────────────── */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem;}
 .form-row.three-col{grid-template-columns:1fr 1fr 1fr;}
 @media(max-width:480px){.form-row,.form-row.three-col{grid-template-columns:1fr;}}
@@ -121,6 +129,7 @@ select option{background:#0d1a2e;}
 .glow-btn:active{opacity:.85;transform:scale(.98);}
 .glow-btn:disabled{opacity:.55;cursor:not-allowed;}
 
+/* ── Result ──────────────────────── */
 #result-box{
   margin-top:1.4rem;text-align:center;padding:1.4rem;border-radius:var(--radius-sm);
   background:linear-gradient(135deg,rgba(56,189,248,.07),rgba(129,140,248,.07));
@@ -136,6 +145,7 @@ select option{background:#0d1a2e;}
 .hidden{display:none!important;}
 @keyframes slideUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
+/* ── Table ───────────────────────── */
 table{width:100%;border-collapse:collapse;}
 th,td{padding:.8rem .9rem;text-align:left;border-bottom:1px solid var(--border);font-size:.88rem;}
 th{color:var(--muted);font-weight:600;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;}
@@ -147,14 +157,7 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .neg{color:var(--red);font-weight:500;}
 .checkmark{color:var(--primary);font-weight:700;font-size:1.1rem;}
 
-.regression-mini-list{display:grid;gap:.7rem;}
-.mini-item{
-  padding:.9rem 1rem;border-radius:12px;border:1px solid var(--border);
-  background:rgba(255,255,255,.03);
-}
-.mini-item strong{display:block;color:var(--text);}
-.mini-item span{display:block;color:var(--muted);font-size:.82rem;}
-
+/* ── Map section (full-width below grid) ── */
 .map-section-full{
   position:relative;z-index:1;
   max-width:1240px;margin:1.5rem auto 0;padding:0 1.5rem;
@@ -173,6 +176,7 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .leaflet-tile{filter:brightness(.85) saturate(.85);}
 .leaflet-container{z-index:1;}
 
+/* ── Leaflet popup ───────────────── */
 .leaflet-popup-content-wrapper{
   background:rgba(7,16,31,.97)!important;
   border:1px solid rgba(56,189,248,.25)!important;
@@ -192,6 +196,7 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .popup-tag.super{border-color:rgba(250,204,21,.4);color:var(--yellow);background:rgba(250,204,21,.08);}
 .popup-meta{display:flex;gap:10px;font-size:.75rem;color:var(--muted);flex-wrap:wrap;}
 
+/* ── Leaflet tooltip (delegacion hover) */
 .leaflet-tooltip.deleg-tooltip{
   background:rgba(7,16,31,.95);border:1px solid rgba(56,189,248,.3);
   border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;
@@ -202,22 +207,50 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .deleg-tooltip .tt-row{display:flex;justify-content:space-between;gap:16px;font-size:.78rem;color:var(--muted);}
 .deleg-tooltip .tt-val{color:var(--text);font-weight:600;}
 
+/* ── Delegaciones ranking ────────── */
+.delegaciones-list{display:flex;flex-direction:column;gap:.55rem;}
+.deleg-row{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:3px 8px;align-items:center;}
+.deleg-info{display:flex;align-items:center;gap:8px;}
+.deleg-rank{
+  font-size:.7rem;font-weight:700;color:var(--muted);
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  border-radius:5px;width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.deleg-row:nth-child(1) .deleg-rank{border-color:rgba(56,189,248,.5);color:var(--primary);}
+.deleg-row:nth-child(2) .deleg-rank{border-color:rgba(129,140,248,.5);color:var(--primary-2);}
+.deleg-row:nth-child(3) .deleg-rank{border-color:rgba(244,114,182,.5);color:var(--accent);}
+.deleg-name{font-size:.85rem;font-weight:500;}
+.deleg-stats{display:flex;flex-direction:column;align-items:flex-end;}
+.deleg-count{font-size:.68rem;color:var(--muted);}
+.deleg-price{font-size:.88rem;font-weight:700;color:var(--primary);}
+.deleg-bar-wrap{grid-column:1/-1;background:rgba(255,255,255,.05);border-radius:99px;height:4px;overflow:hidden;}
+.deleg-bar{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--primary),var(--primary-2));transition:width .8s ease;}
+
+/* ── Charts ──────────────────────── */
 .plots-section{position:relative;z-index:1;max-width:1240px;margin:2.5rem auto 0;padding:0 1.5rem;}
 .section-title{display:flex;align-items:center;gap:10px;margin-bottom:1.4rem;}
 .section-title .icon{width:18px;height:18px;}
 .section-title h2{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;}
 
-.regression-showcase{display:grid;gap:1rem;margin-bottom:1.4rem;}
-.regression-panel{
+.regression-gallery{margin-bottom:1.25rem;}
+.regression-block{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.1rem;display:grid;gap:.9rem;
+  padding:1.1rem;box-shadow:var(--shadow);
 }
-.regression-copy h3{font-size:1rem;margin-bottom:.35rem;}
-.regression-copy p{font-size:.86rem;color:var(--muted);}
-.regression-images{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;}
+.regression-head h3{font-size:1rem;margin-bottom:.35rem;}
+.regression-head p{font-size:.84rem;color:var(--muted);margin-bottom:1rem;}
+.regression-stack{display:grid;gap:1rem;}
+.regression-item{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.025);
+  border-radius:12px;padding:.9rem;
+}
+.regression-title{font-size:.86rem;font-weight:600;color:var(--text);margin-bottom:.7rem;}
+.regression-images{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
 .regression-images img{
-  width:100%;display:block;border-radius:12px;border:1px solid var(--border);
-  background:rgba(0,0,0,.2);
+  width:100%;display:block;border-radius:10px;border:1px solid var(--border);
+  background:rgba(0,0,0,.18);
 }
 
 .plots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
@@ -233,6 +266,7 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .chart-title{font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:.6rem;letter-spacing:.01em;}
 .chart-div{flex:1;min-height:260px;}
 
+/* ── Footer ──────────────────────── */
 .site-footer{
   position:relative;z-index:1;
   text-align:center;padding:3rem 1.5rem 2rem;color:var(--muted);font-size:.78rem;
