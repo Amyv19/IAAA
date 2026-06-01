@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>IAAA · Airbnb CDMX Price Predictor</title>
-  <meta name="description" content="Dashboard interactivo del proyecto IAAA con modelos de regresión para Airbnb en Ciudad de México."/>
+  <title>Airbnb CDMX · Price Predictor</title>
+  <meta name="description" content="Dashboard de predicción de precios de Airbnb en Ciudad de México."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -23,13 +23,13 @@
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
         <polyline points="9 22 9 12 15 12 15 22"/>
       </svg>
-      <span class="brand-name">IAAA <strong>Airbnb CDMX</strong></span>
+      <span class="brand-name">Airbnb <strong>CDMX</strong></span>
     </div>
     <span class="nav-tag">Machine Learning Dashboard</span>
   </nav>
 
   <header class="hero">
-    <div class="hero-badge">Regresión lineal y polinómica · Scikit-Learn</div>
+    <div class="hero-badge">Regresión Lineal · Scikit-Learn</div>
     <h1>Price Predictor</h1>
     <p class="hero-sub">Modelo entrenado con <strong>27,051</strong> listings reales de Airbnb en Ciudad de México</p>
   </header>
@@ -103,7 +103,7 @@
         <div id="result-box" class="hidden">
           <div class="result-label">Precio estimado por noche</div>
           <div id="price-result">$0.00</div>
-          <div class="result-sub">MXN · Regresión Lineal Múltiple</div>
+          <div class="result-sub">MXN &middot; Regresión Lineal Múltiple</div>
         </div>
       </section>
 
@@ -113,29 +113,52 @@
             <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
             <line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>
           </svg>
-          <h2>Modelos de Regresión del Proyecto</h2>
+          <h2>Model Comparison</h2>
         </div>
-        <p class="section-copy">Se muestran los modelos solicitados para la entrega web: lineal, polinomial grado 1 y polinomial grado 2.</p>
         <table>
-          <thead><tr><th>Modelo</th><th>RMSE</th><th>R²</th><th>Detalle</th></tr></thead>
+          <thead><tr><th>Model</th><th>RMSE</th><th>R²</th><th>Best</th></tr></thead>
           <tbody>
             <tr class="best-row">
-              <td>Regresión lineal múltiple</td>
-              <td>377.1</td>
-              <td class="pos">0.6281</td>
-              <td class="checkmark">Base</td>
+              <td>Gradient Boosting</td>
+              <td>292.8</td>
+              <td class="pos">0.7758</td>
+              <td class="checkmark">✓</td>
             </tr>
             <tr>
-              <td>Regresión polinómica grado 1</td>
-              <td>377.1</td>
-              <td class="pos">0.6281</td>
-              <td class="checkmark">Equivalente lineal</td>
+              <td>Random Forest</td>
+              <td>302.4</td>
+              <td class="pos">0.7608</td>
+              <td class="checkmark"></td>
             </tr>
             <tr>
-              <td>Regresión polinómica grado 2</td>
+              <td>Elastic Net</td>
+              <td>376.9</td>
+              <td class="pos">0.6284</td>
+              <td class="checkmark"></td>
+            </tr>
+            <tr>
+              <td>Ridge</td>
+              <td>376.9</td>
+              <td class="pos">0.6283</td>
+              <td class="checkmark"></td>
+            </tr>
+            <tr>
+              <td>Regresion lineal multiple</td>
+              <td>377.1</td>
+              <td class="pos">0.6281</td>
+              <td class="checkmark"></td>
+            </tr>
+            <tr>
+              <td>Regresion polinomica grado 2</td>
               <td>465.5</td>
               <td class="pos">0.4331</td>
-              <td class="checkmark">Curva cuadrática</td>
+              <td class="checkmark"></td>
+            </tr>
+            <tr>
+              <td>Regresion polinomica grado 3</td>
+              <td>564.7</td>
+              <td class="pos">0.1658</td>
+              <td class="checkmark"></td>
             </tr>
           </tbody>
         </table>
@@ -150,22 +173,25 @@
             <line x1="2" y1="12" x2="22" y2="12"/>
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
           </svg>
-          <h2>Gráficas Usadas en las Regresiones</h2>
+          <h2>Ranking por Alcaldía</h2>
         </div>
-        <p class="section-copy">Aquí se integran las gráficas utilizadas en el proyecto para documentar cada uno de los modelos pedidos.</p>
-        <div class="regression-mini-list">
-          <div class="mini-item">
-            <strong>Lineal</strong>
-            <span>Reales vs predichos y residuos</span>
-          </div>
-          <div class="mini-item">
-            <strong>Polinómica grado 1</strong>
-            <span>Comparte la base lineal del ajuste</span>
-          </div>
-          <div class="mini-item">
-            <strong>Polinómica grado 2</strong>
-            <span>Ajuste cuadrático y residuos</span>
-          </div>
+        <div class="delegaciones-list">
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">1</span><span class="deleg-name">Miguel Hidalgo</span></div><div class="deleg-stats"><span class="deleg-count">3,979 listings</span><span class="deleg-price">$1,301</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:100.0%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">2</span><span class="deleg-name">Cuajimalpa de Morelos</span></div><div class="deleg-stats"><span class="deleg-count">349 listings</span><span class="deleg-price">$1,286</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:98.8%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">3</span><span class="deleg-name">Cuauhtémoc</span></div><div class="deleg-stats"><span class="deleg-count">11,253 listings</span><span class="deleg-price">$1,185</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:91.1%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">4</span><span class="deleg-name">Milpa Alta</span></div><div class="deleg-stats"><span class="deleg-count">22 listings</span><span class="deleg-price">$946</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:72.7%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">5</span><span class="deleg-name">Álvaro Obregón</span></div><div class="deleg-stats"><span class="deleg-count">812 listings</span><span class="deleg-price">$900</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:69.2%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">6</span><span class="deleg-name">Benito Juárez</span></div><div class="deleg-stats"><span class="deleg-count">2,528 listings</span><span class="deleg-price">$811</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:62.3%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">7</span><span class="deleg-name">Coyoacán</span></div><div class="deleg-stats"><span class="deleg-count">1,415 listings</span><span class="deleg-price">$794</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:61.0%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">8</span><span class="deleg-name">La Magdalena Contreras</span></div><div class="deleg-stats"><span class="deleg-count">108 listings</span><span class="deleg-price">$790</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:60.7%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">9</span><span class="deleg-name">Iztacalco</span></div><div class="deleg-stats"><span class="deleg-count">441 listings</span><span class="deleg-price">$745</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:57.3%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">10</span><span class="deleg-name">Venustiano Carranza</span></div><div class="deleg-stats"><span class="deleg-count">816 listings</span><span class="deleg-price">$682</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:52.4%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">11</span><span class="deleg-name">Tlalpan</span></div><div class="deleg-stats"><span class="deleg-count">626 listings</span><span class="deleg-price">$638</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:49.0%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">12</span><span class="deleg-name">Xochimilco</span></div><div class="deleg-stats"><span class="deleg-count">120 listings</span><span class="deleg-price">$617</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:47.4%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">13</span><span class="deleg-name">Gustavo A. Madero</span></div><div class="deleg-stats"><span class="deleg-count">459 listings</span><span class="deleg-price">$552</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:42.4%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">14</span><span class="deleg-name">Iztapalapa</span></div><div class="deleg-stats"><span class="deleg-count">261 listings</span><span class="deleg-price">$543</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:41.7%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">15</span><span class="deleg-name">Azcapotzalco</span></div><div class="deleg-stats"><span class="deleg-count">344 listings</span><span class="deleg-price">$512</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:39.4%"></div></div></div>
+          <div class="deleg-row"><div class="deleg-info"><span class="deleg-rank">16</span><span class="deleg-name">Tláhuac</span></div><div class="deleg-stats"><span class="deleg-count">34 listings</span><span class="deleg-price">$344</span></div><div class="deleg-bar-wrap"><div class="deleg-bar" style="width:26.4%"></div></div></div>
         </div>
       </section>
     </div>
@@ -178,7 +204,7 @@
           <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
           <line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
         </svg>
-        <h2>Mapa de Listings por Alcaldía · CDMX</h2>
+        <h2>Mapa de Listings por Alcaldía &middot; CDMX</h2>
         <div class="map-legend">
           <span class="dot low"></span>&lt;$600 &nbsp;
           <span class="dot mid"></span>$600–$1,500 &nbsp;
@@ -186,7 +212,7 @@
         </div>
       </div>
       <div id="map"></div>
-      <p class="map-note">3,000 listings · Polígonos coloreados por precio mediano de cada alcaldía · Hover para ver estadísticas</p>
+      <p class="map-note">3,000 listings &middot; Polígonos coloreados por precio mediano de cada alcaldía &middot; Hover para ver estadísticas</p>
     </section>
   </div>
 
@@ -199,38 +225,37 @@
     </div>
 
     <section class="regression-showcase">
-      <article class="regression-panel">
-        <div class="regression-copy">
-          <h3>Regresión lineal</h3>
-          <p>Se muestran la gráfica de valores reales vs predichos y la gráfica de residuos del modelo lineal múltiple.</p>
-        </div>
-        <div class="regression-images">
-          <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión lineal reales vs predichos">
-          <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo lineal">
-        </div>
-      </article>
+      <div class="section-subcopy">
+        <p>Modelos de regresión del proyecto: lineal, polinómica grado 1 y polinómica grado 2 con las gráficas utilizadas.</p>
+      </div>
+      <div class="plots-grid regression-grid">
+        <article class="chart-card regression-card">
+          <p class="chart-title">Regresión lineal</p>
+          <p class="regression-note">Se muestran la gráfica de valores reales vs predichos y la gráfica de residuos del modelo lineal múltiple.</p>
+          <div class="regression-images">
+            <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión lineal reales vs predichos">
+            <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo lineal">
+          </div>
+        </article>
 
-      <article class="regression-panel">
-        <div class="regression-copy">
-          <h3>Regresión polinómica grado 1</h3>
-          <p>El grado 1 mantiene el comportamiento lineal del modelo base, por eso se reutilizan las mismas gráficas empleadas en el proyecto.</p>
-        </div>
-        <div class="regression-images">
-          <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión polinómica grado 1 reales vs predichos">
-          <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo polinómico grado 1">
-        </div>
-      </article>
+        <article class="chart-card regression-card">
+          <p class="chart-title">Regresión polinómica grado 1</p>
+          <p class="regression-note">El grado 1 mantiene el comportamiento lineal del modelo base, por eso se reutilizan las mismas gráficas empleadas en el proyecto.</p>
+          <div class="regression-images">
+            <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión polinómica grado 1 reales vs predichos">
+            <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo polinómico grado 1">
+          </div>
+        </article>
 
-      <article class="regression-panel">
-        <div class="regression-copy">
-          <h3>Regresión polinómica grado 2</h3>
-          <p>Se integran la gráfica de ajuste cuadrático y la gráfica de residuos utilizadas en la documentación del proyecto.</p>
-        </div>
-        <div class="regression-images">
-          <img src="static/plots/Regresion_polinomica_grado_2_vs_predichos.png" alt="Regresión polinómica grado 2 reales vs predichos">
-          <img src="static/plots/Residuos_Modelo_polinomico_grado_2.png" alt="Residuos del modelo polinómico grado 2">
-        </div>
-      </article>
+        <article class="chart-card regression-card">
+          <p class="chart-title">Regresión polinómica grado 2</p>
+          <p class="regression-note">Se integran la gráfica de ajuste cuadrático y la gráfica de residuos utilizadas en la documentación del proyecto.</p>
+          <div class="regression-images">
+            <img src="static/plots/Regresion_polinomica_grado_2_vs_predichos.png" alt="Regresión polinómica grado 2 reales vs predichos">
+            <img src="static/plots/Residuos_Modelo_polinomico_grado_2.png" alt="Residuos del modelo polinómico grado 2">
+          </div>
+        </article>
+      </div>
     </section>
 
     <div class="plots-grid">
@@ -251,18 +276,18 @@
         <div id="chart-coef" class="chart-div"></div>
       </div>
       <div class="chart-card">
-        <p class="chart-title">Reales vs Predichos — Modelo Lineal</p>
+        <p class="chart-title">Reales vs Predichos &mdash; Modelo Lineal</p>
         <div id="chart-scatter-lin" class="chart-div"></div>
       </div>
       <div class="chart-card">
-        <p class="chart-title">Reales vs Predichos — Polinómica Grado 2</p>
+        <p class="chart-title">Reales vs Predichos &mdash; Polinómica Grado 2</p>
         <div id="chart-scatter-p2" class="chart-div"></div>
       </div>
     </div>
   </section>
 
   <footer class="site-footer">
-    <p>Academic project · Data: <a href="https://insideairbnb.com" target="_blank">Inside Airbnb CDMX</a> · Model: Scikit-Learn · Charts: Plotly · Map: Leaflet</p>
+    <p>Academic project &middot; Data: <a href="https://insideairbnb.com" target="_blank">Inside Airbnb CDMX</a> &middot; Model: Scikit-Learn &middot; Charts: Plotly &middot; Map: Leaflet</p>
   </footer>
 
   <script src="static/js/app.js"></script>

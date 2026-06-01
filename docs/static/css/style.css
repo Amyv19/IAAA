@@ -233,20 +233,11 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
 .section-title .icon{width:18px;height:18px;}
 .section-title h2{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;}
 
-.regression-gallery{margin-bottom:1.25rem;}
-.regression-block{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:1.1rem;box-shadow:var(--shadow);
-}
-.regression-head h3{font-size:1rem;margin-bottom:.35rem;}
-.regression-head p{font-size:.84rem;color:var(--muted);margin-bottom:1rem;}
-.regression-stack{display:grid;gap:1rem;}
-.regression-item{
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.025);
-  border-radius:12px;padding:.9rem;
-}
-.regression-title{font-size:.86rem;font-weight:600;color:var(--text);margin-bottom:.7rem;}
+.regression-showcase{display:grid;gap:.9rem;margin-bottom:1.25rem;}
+.section-subcopy p{font-size:.84rem;color:var(--muted);}
+.regression-grid{grid-template-columns:1fr;}
+.regression-card{padding:1rem;}
+.regression-note{font-size:.78rem;color:var(--muted);margin-bottom:.7rem;}
 .regression-images{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;}
 .regression-images img{
   width:100%;display:block;border-radius:10px;border:1px solid var(--border);
