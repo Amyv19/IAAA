@@ -244,15 +244,50 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
   width:100%;display:block;border-radius:10px;border:1px solid var(--border);
   background:rgba(0,0,0,.18);
 }
-.metric-only{justify-content:flex-start;}
-.metric-chip-row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:auto;}
-.metric-chip{
-  display:inline-flex;align-items:center;gap:.35rem;
-  padding:.45rem .65rem;border-radius:999px;border:1px solid var(--border);
-  background:rgba(255,255,255,.04);font-size:.75rem;color:var(--text);
+.metric-only{
+  justify-content:flex-start;
+  min-height:320px;
+  position:relative;
+  background:
+    radial-gradient(circle at top right, rgba(56,189,248,.12), transparent 38%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)),
+    var(--surface);
 }
-.metric-chip strong{color:var(--primary);}
-.best-chip{border-color:rgba(56,189,248,.45);color:var(--primary);}
+.metric-only::after{
+  content:"17 variables";
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  padding:.32rem .6rem;
+  border-radius:999px;
+  border:1px solid rgba(56,189,248,.25);
+  background:rgba(56,189,248,.08);
+  color:var(--primary);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.02em;
+}
+.metric-chip-row{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.75rem;
+  margin-top:auto;
+  align-content:end;
+}
+.metric-chip{
+  display:flex;align-items:center;gap:.35rem;
+  min-height:64px;
+  padding:.8rem .9rem;border-radius:18px;border:1px solid var(--border);
+  background:rgba(255,255,255,.045);font-size:.92rem;color:var(--text);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.metric-chip strong{color:var(--primary);font-size:1.02rem;}
+.metric-chip:last-child{grid-column:1/-1;}
+.best-chip{
+  border-color:rgba(56,189,248,.45);
+  color:var(--primary);
+  background:rgba(56,189,248,.09);
+}
 
 .plots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
 @media(max-width:900px){.plots-grid,.regression-grid{grid-template-columns:repeat(2,1fr);}}
