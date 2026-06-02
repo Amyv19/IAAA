@@ -2,44 +2,12 @@
    APP.JS — Airbnb CDMX Dashboard
    ════════════════════════════════════════════════════ */
 
-/* ── Plotly charts ────────────────────────────────── */
-const PLOTLY_CFG = {
-  responsive: true,
-  displayModeBar: true,
-  modeBarButtonsToRemove: ['select2d', 'lasso2d', 'toImage'],
-  displaylogo: false,
-};
-
 const ROUTES = {
-  charts: {
-    correlation: 'api/chart/correlation',
-    boxplot: 'api/chart/boxplot',
-    neighbourhood: 'api/chart/price-by-neighbourhood',
-    coefficients: 'api/chart/coefficients',
-    scatterLineal: 'api/chart/scatter-lineal',
-    scatterPoly2: 'api/chart/scatter-poly2',
-  },
   mapData: 'api/map-data',
   geojson: 'static/cdmx_alcaldias.geojson',
   model: 'static/model.json',
   predict: 'predict',
 };
-
-async function loadChart(endpoint, divId) {
-  try {
-    const res  = await fetch(endpoint);
-    const spec = await res.json();
-    if (spec.error) { console.error(divId, spec.error); return; }
-    Plotly.newPlot(divId, spec.data, spec.layout, PLOTLY_CFG);
-  } catch (e) { console.error('Chart error', divId, e); }
-}
-
-loadChart(ROUTES.charts.correlation,   'chart-correlation');
-loadChart(ROUTES.charts.boxplot,       'chart-boxplot');
-loadChart(ROUTES.charts.neighbourhood, 'chart-neighbourhood');
-loadChart(ROUTES.charts.coefficients,  'chart-coef');
-loadChart(ROUTES.charts.scatterLineal, 'chart-scatter-lin');
-loadChart(ROUTES.charts.scatterPoly2,  'chart-scatter-p2');
 
 /* ── Prediction form ──────────────────────────────── */
 let browserModelPromise;
