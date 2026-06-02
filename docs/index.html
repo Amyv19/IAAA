@@ -220,7 +220,7 @@
       </div>
       <div class="plots-grid regression-grid">
         <article class="chart-card regression-card">
-          <p class="chart-title">Regresión lineal</p>
+          <p class="chart-title">Regresion lineal multiple</p>
           <p class="regression-note">Se muestran la gráfica de valores reales vs predichos y la gráfica de residuos del modelo lineal múltiple.</p>
           <div class="regression-images">
             <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión lineal reales vs predichos">
@@ -229,20 +229,40 @@
         </article>
 
         <article class="chart-card regression-card">
-          <p class="chart-title">Regresión polinómica grado 1</p>
-          <p class="regression-note">El grado 1 mantiene el comportamiento lineal del modelo base, por eso se reutilizan las mismas gráficas empleadas en el proyecto.</p>
-          <div class="regression-images">
-            <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión polinómica grado 1 reales vs predichos">
-            <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo polinómico grado 1">
-          </div>
-        </article>
-
-        <article class="chart-card regression-card">
-          <p class="chart-title">Regresión polinómica grado 2</p>
+          <p class="chart-title">Regresion polinomica grado 2</p>
           <p class="regression-note">Se integran la gráfica de ajuste cuadrático y la gráfica de residuos utilizadas en la documentación del proyecto.</p>
           <div class="regression-images">
             <img src="static/plots/Regresion_polinomica_grado_2_vs_predichos.png" alt="Regresión polinómica grado 2 reales vs predichos">
             <img src="static/plots/Residuos_Modelo_polinomico_grado_2.png" alt="Residuos del modelo polinómico grado 2">
+          </div>
+        </article>
+
+        <article class="chart-card regression-card">
+          <p class="chart-title">Regresion polinomica grado 3</p>
+          <p class="regression-note">Se integran la gráfica de ajuste cúbico y la gráfica de residuos exportadas del modelo polinómico de grado 3.</p>
+          <div class="regression-images">
+            <img src="static/plots/Regresion_polinomica_grado_3_vs_predichos.png" alt="Regresión polinómica grado 3 reales vs predichos">
+            <img src="static/plots/Residuos_Modelo_polinomico_grado_3.png" alt="Residuos del modelo polinómico grado 3">
+          </div>
+        </article>
+
+        <article class="chart-card regression-card metric-only">
+          <p class="chart-title">k vecinos</p>
+          <p class="regression-note">Modelo comparado con el mismo conjunto reconstruido de 17 variables del proyecto.</p>
+          <div class="metric-chip-row">
+            <span class="metric-chip"><strong>RMSE</strong> 421.4</span>
+            <span class="metric-chip"><strong>R²</strong> 0.5354</span>
+            <span class="metric-chip best-chip">Mejor de la tabla</span>
+          </div>
+        </article>
+
+        <article class="chart-card regression-card metric-only">
+          <p class="chart-title">svm</p>
+          <p class="regression-note">Modelo comparado con el mismo conjunto reconstruido de 17 variables del proyecto.</p>
+          <div class="metric-chip-row">
+            <span class="metric-chip"><strong>RMSE</strong> 476.9</span>
+            <span class="metric-chip"><strong>R²</strong> 0.4051</span>
+            <span class="metric-chip">Sin gráfica exportada</span>
           </div>
         </article>
       </div>
