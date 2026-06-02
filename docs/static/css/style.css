@@ -274,6 +274,36 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
   margin-top:auto;
   align-content:end;
 }
+.metric-plot-stack,
+.regression-grid article:nth-of-type(4) .regression-images{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.75rem;
+  margin-top:auto;
+  align-content:end;
+}
+.metric-plot-stack::before,
+.regression-grid article:nth-of-type(4) .regression-images::before{
+  content:"";
+  grid-column:1/-1;
+  height:170px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background-color:rgba(255,255,255,.04);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.regression-grid article:nth-of-type(4){
+  min-height:390px;
+}
+.regression-grid article:nth-of-type(4) .regression-images::before{
+  background-image:url("../plots/Panel_Modelo_k_vecinos.png");
+}
+.svm-plot-stack::before{
+  background-image:url("../plots/Panel_Modelo_svm.png");
+}
 .metric-chip{
   display:flex;align-items:center;gap:.35rem;
   min-height:64px;

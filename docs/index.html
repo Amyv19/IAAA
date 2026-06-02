@@ -139,14 +139,14 @@
             </tr>
             <tr class="best-row">
               <td>k vecinos</td>
-              <td>421.4</td>
-              <td class="pos">0.5354</td>
+              <td>409.4</td>
+              <td class="pos">0.5614</td>
               <td class="checkmark">✓</td>
             </tr>
             <tr>
               <td>svm</td>
-              <td>476.9</td>
-              <td class="pos">0.4051</td>
+              <td>424.6</td>
+              <td class="pos">0.5285</td>
               <td class="checkmark"></td>
             </tr>
           </tbody>
@@ -222,7 +222,7 @@
         <article class="chart-card regression-card">
           <p class="chart-title">Regresion lineal multiple</p>
           <p class="regression-note">Se muestran la gráfica de valores reales vs predichos y la gráfica de residuos del modelo lineal múltiple.</p>
-          <div class="regression-images">
+          <div class="metric-chip-row metric-plot-stack knn-plot-stack">
             <img src="static/plots/Regresion_lineal_reales_vs_predichos.png" alt="Regresión lineal reales vs predichos">
             <img src="static/plots/Residuos_Modelo_lineal.png" alt="Residuos del modelo lineal">
           </div>
@@ -246,11 +246,11 @@
           </div>
         </article>
 
-        <article class="chart-card regression-card metric-only">
+        <article class="chart-card regression-card">
           <p class="chart-title">k vecinos</p>
-          <p class="regression-note">Modelo comparado con el mismo conjunto reconstruido de 17 variables del proyecto.</p>
-          <div class="metric-chip-row">
-            <span class="metric-chip"><strong>RMSE</strong> 421.4</span>
+          <p class="regression-note">Se integran la grafica de valores reales vs predichos y la grafica de residuos del modelo de k vecinos usando el mismo conjunto de 17 variables.</p>
+          <div class="regression-images">
+            <span class="metric-chip"><strong>RMSE</strong> 409.4</span>
             <span class="metric-chip"><strong>R²</strong> 0.5354</span>
             <span class="metric-chip best-chip">Mejor de la tabla</span>
           </div>
@@ -258,9 +258,9 @@
 
         <article class="chart-card regression-card metric-only">
           <p class="chart-title">svm</p>
-          <p class="regression-note">Modelo comparado con el mismo conjunto reconstruido de 17 variables del proyecto.</p>
-          <div class="metric-chip-row">
-            <span class="metric-chip"><strong>RMSE</strong> 476.9</span>
+          <p class="regression-note">Se integran la grafica de valores reales vs predichos y la grafica de residuos del modelo SVM usando el mismo conjunto de 17 variables.</p>
+          <div class="metric-chip-row metric-plot-stack svm-plot-stack">
+            <span class="metric-chip"><strong>RMSE</strong> 424.6</span>
             <span class="metric-chip"><strong>R²</strong> 0.4051</span>
             <span class="metric-chip">Sin gráfica exportada</span>
           </div>
