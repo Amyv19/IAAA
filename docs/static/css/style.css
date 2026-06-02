@@ -274,35 +274,41 @@ tbody tr:hover{background:rgba(255,255,255,.025);}
   margin-top:auto;
   align-content:end;
 }
-.metric-plot-stack,
-.regression-grid article:nth-of-type(4) .regression-images{
+.regression-grid article:nth-of-type(4) .regression-images,
+.regression-grid article:nth-of-type(5) .regression-images{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:.75rem;
-  margin-top:auto;
-  align-content:end;
+  gap:.8rem;
 }
-.metric-plot-stack::before,
-.regression-grid article:nth-of-type(4) .regression-images::before{
+.regression-grid article:nth-of-type(4) .regression-images span,
+.regression-grid article:nth-of-type(5) .regression-images span{
+  display:none;
+}
+.regression-grid article:nth-of-type(4) .regression-images::before,
+.regression-grid article:nth-of-type(4) .regression-images::after,
+.regression-grid article:nth-of-type(5) .regression-images::before,
+.regression-grid article:nth-of-type(5) .regression-images::after{
   content:"";
-  grid-column:1/-1;
-  height:170px;
-  border-radius:12px;
+  display:block;
+  min-height:170px;
+  border-radius:10px;
   border:1px solid var(--border);
-  background-color:rgba(255,255,255,.04);
+  background-color:rgba(0,0,0,.18);
   background-position:center;
   background-repeat:no-repeat;
   background-size:cover;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-}
-.regression-grid article:nth-of-type(4){
-  min-height:390px;
 }
 .regression-grid article:nth-of-type(4) .regression-images::before{
-  background-image:url("../plots/Panel_Modelo_k_vecinos.png");
+  background-image:url("../plots/Regresion_k_vecinos_reales_vs_predichos.png");
 }
-.svm-plot-stack::before{
-  background-image:url("../plots/Panel_Modelo_svm.png");
+.regression-grid article:nth-of-type(4) .regression-images::after{
+  background-image:url("../plots/Residuos_Modelo_k_vecinos.png");
+}
+.regression-grid article:nth-of-type(5) .regression-images::before{
+  background-image:url("../plots/Regresion_svm_reales_vs_predichos.png");
+}
+.regression-grid article:nth-of-type(5) .regression-images::after{
+  background-image:url("../plots/Residuos_Modelo_svm.png");
 }
 .metric-chip{
   display:flex;align-items:center;gap:.35rem;
